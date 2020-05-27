@@ -31,7 +31,7 @@ services:
     depends_on:
       - app
 
-# Database
+### Database #########################################
   mysql:
     image: mariadb:${MARIADB_VERSION:-latest}
     volumes:
@@ -47,7 +47,7 @@ services:
     networks:
       - app-network
 
-# Database Two
+### Database Two #######################################
   mysql_published:
     image: mariadb:${MARIADB_VERSION:-latest}
     volumes:
