@@ -34,7 +34,6 @@ services:
 # Database
   mysql:
     image: mariadb:${MARIADB_VERSION:-latest}
-    env_file:
     volumes:
       - .docker/mysql/vol/:/var/lib/mysql
     environment:
