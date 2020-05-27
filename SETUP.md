@@ -1,16 +1,8 @@
 # L8 Introduction
 
-With the following command I created the Laravel application in directory l8. I then added the .docker, deploy and infratructure directories as well as docker-compose.yml.
 
-```
-laravel new l8
-```
 
-To including authentication right away and skip next step you can also run
-
-```
-laravel new blog --auth
-```
+git clone `https://github.com/smart48/l8.git`
 
 ## Generate Auth Key and .env
 
@@ -20,11 +12,11 @@ php artisan key:generate
 
 Then add `.env` to `.gitignore`.
 
-## Models
+## Installation 
 
-See Models README for that.
+ `composer install` and `npm install` and `php artisan migrate`
 
-## Hosts
+## Local Host
 
 Local docker will run on `localhost:8001` so you can keep Laravel Valet run sites running on .test.
 
@@ -37,7 +29,7 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' l8_
 172.18.0.3
 ```
 
-## Docker
+## Local Docker Compose
 
 Locally we work with `docker-compose.yml` You can run this with `docker-compose up -d` as it is the default. See [Docker docs](https://docs.docker.com/compose/)
 
@@ -90,32 +82,3 @@ a78b3cdf6ce1        l8_app              "docker-entrypoint.s…"   3 seconds ago
 ba590f13c57d        mariadb:latest      "docker-entrypoint.s…"   4 seconds ago       Up 3 seconds        3306/tcp               mysql
 ```
 
-## Authentication
-
-Laravel Authentication can be done with Laravel UI
-
-[Laraval documentation](https://laravel.com/docs/7.x/authentication)
-
-```
-composer require laravel/ui
-``
-
-and
-
-```
-php artisan ui vue --auth
-```
-
-_This command should be used on fresh applications and will install a layout view, registration and login views, as well as routes for all authentication end-points. A HomeController will also be generated to handle post-login requests to your application's dashboard._
-
-## IDE Helper
-
-IDE helper to work better without needless error warnings in Visual Studio Code.
-
-```
-composer require --dev barryvdh/laravel-ide-helper
-```
-
-```
-php artisan ide-helper:generate
-```
