@@ -42,6 +42,35 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
       - MYSQL_DATABASE=${MYSQL_DATABASE:-l8}
     restart: unless-stopped
+    ports:
+      - "3307:3306"
+    networks:
+      - app-network
+
+# Database Two
+  mysql_published:
+    image: mariadb:${MARIADB_VERSION:-latest}
+    volumes:
+      - .docker/mysql2/vol/:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-password}
+      - MYSQL_USER=${MYSQL_USER:-root}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-l8}
+    restart: unless-stopped
+    ports:
+      - "3308:3306"
+    networks:
+      - app-network
+
+### Redis ################################################
+  redis:
+    image: redis:${REDIS_VERSION:-latest}
+    volumes:
+      - .docker/redis/vol:/data
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
     networks:
       - app-network
 
