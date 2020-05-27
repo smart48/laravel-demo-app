@@ -33,7 +33,7 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' l8_
 
 Locally we work with `docker-compose.yml` You can run this with `docker-compose up -d` as it is the default. See [Docker docs](https://docs.docker.com/compose/)
 
-Do add all environmental variables to `.docker/.env`!
+You can add all environmental variables to `.docker/.env`, but they won't load unless you run `eval $(egrep -v '^#' .docker/.env | xargs) docker-compose config` because somehow we have to have .env in same directory and there we already have the one for Laravel!
 
 NB Do make sure you ran `valet stop` if it interferes with you using `*.test` locally.
 
