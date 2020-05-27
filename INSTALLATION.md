@@ -69,10 +69,13 @@ And to shut them down
 
 ```
 docker-compose down 
-Stopping l8_app_1 ... done
+Sdocker-compose down 
 Stopping l8_web_1 ... done
-Removing l8_app_1 ... done
+Stopping l8_app_1 ... done
+Stopping mysql    ... done
 Removing l8_web_1 ... done
+Removing l8_app_1 ... done
+Removing mysql    ... done
 Removing network l8_app-network
 ```
 
@@ -82,8 +85,9 @@ Removing network l8_app-network
 ```
 docker container ls 
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
-c2ac2f152579        l8_app              "docker-entrypoint.s…"   2 seconds ago       Up 2 seconds        9000/tcp               l8_app_1
-2d5903fd452d        nginx:mainline      "nginx -g 'daemon of…"   2 seconds ago       Up 1 second         0.0.0.0:8001->80/tcp   l8_web_1
+e4f55fa17a3b        nginx:latest        "nginx -g 'daemon of…"   3 seconds ago       Up 2 seconds        0.0.0.0:8001->80/tcp   l8_web_1
+a78b3cdf6ce1        l8_app              "docker-entrypoint.s…"   3 seconds ago       Up 3 seconds        9000/tcp               l8_app_1
+ba590f13c57d        mariadb:latest      "docker-entrypoint.s…"   4 seconds ago       Up 3 seconds        3306/tcp               mysql
 ```
 
 ## Authentication
