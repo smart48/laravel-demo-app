@@ -69,7 +69,7 @@ services:
     volumes:
       - .docker/redis/vol:/data
     ports:
-      - "6379:6379"
+      - "6380:6379"
     restart: unless-stopped
     networks:
       - app-network
