@@ -14,16 +14,39 @@ services:
       - ./:/var/www
     networks:
       - app-network
+    depends_on:
+      - mysql
 
   # Web server
   web:
-    image: nginx:mainline
+    image: nginx:${NGINX_VERSION:-latest}
+    env_file:
+      - .docker/.env
     restart: unless-stopped
     ports:
       - "8001:80"
     volumes:
       - ./:/var/www
       - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+    depends_on:
+      - app
+
+# Database
+  mysql:
+    image: mariadb:${MARIADB_VERSION:-latest}
+    env_file:
+      - .docker/.env
+    container_name: mysql
+    volumes:
+      - .docker/mysql/vol/:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-password}
+      - MYSQL_USER=${MYSQL_USER:-root}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-wordpress}
+    restart: unless-stopped
     networks:
       - app-network
 
