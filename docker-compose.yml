@@ -56,7 +56,7 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-password}
       - MYSQL_USER=${MYSQL_USER:-root}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
-      - MYSQL_DATABASE=${MYSQL_DATABASE:-l8}
+      - MYSQL_DATABASE=${MYSQL_DATABASE:-published}
     restart: unless-stopped
     ports:
       - "3308:3306"
