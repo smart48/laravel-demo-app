@@ -37,9 +37,9 @@ services:
     volumes:
       - .docker/mysql/vol/:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-password}
-      - MYSQL_USER=${MYSQL_USER:-root}
+      - MYSQL_USER=${MYSQL_USER:-forge}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-password}
       - MYSQL_DATABASE=${MYSQL_DATABASE:-l8}
     restart: unless-stopped
     ports:
@@ -53,9 +53,9 @@ services:
     volumes:
       - .docker/mysql2/vol/:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-password}
-      - MYSQL_USER=${MYSQL_USER:-root}
+      - MYSQL_USER=${MYSQL_USER:-forge}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD:-password}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-password}
       - MYSQL_DATABASE=${MYSQL_DATABASE:-published}
     restart: unless-stopped
     ports:

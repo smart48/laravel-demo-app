@@ -14,7 +14,16 @@ Then add `.env` to `.gitignore`.
 
 ## Installation 
 
- `composer install` and `npm install` and `php artisan migrate`
+ `composer install` to install all PHP packages and `npm install` for the JS and Vue parts. 
+ 
+ ## Migrations
+ 
+ Then migrations using `php artisan migrate --database="nameOfConnection"`. We use `--database` as we work with two databases locally and in Kubernetes. So we have
+
+ - `php artisan migrate --database="mysql"` for base database
+ - `php artisan migrate --path=/database/migrations/published --database="mysql_published` for the secondary.
+
+As of this writing the secondary database is still empty
 
 ## Local Host
 
