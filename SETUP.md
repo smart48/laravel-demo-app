@@ -103,6 +103,34 @@ To set up Kubernetes with nodes and managed databases we use Terraform and Kuber
 terraform init
 ```
 
+You should see something like
+
+```
+Initializing the backend...
+
+Initializing provider plugins...
+- Checking for available provider plugins...
+- Downloading plugin for provider "helm" (hashicorp/helm) 1.2.1...
+- Downloading plugin for provider "digitalocean" (terraform-providers/digitalocean) 1.18.0...
+
+The following providers do not have any version constraints in configuration,
+so the latest version was installed.
+
+To prevent automatic upgrades to new major versions that may contain breaking
+changes, it is recommended to add version = "..." constraints to the
+corresponding provider blocks in configuration, with the constraint strings
+suggested below.
+
+* provider.digitalocean: version = "~> 1.18"
+* provider.helm: version = "~> 1.2"
+* provider.null: version = "~> 2.1"
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+```
 To check if the files will do their job you can run a 
 
 ```
