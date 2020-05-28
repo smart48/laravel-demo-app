@@ -25,6 +25,8 @@ Then add `.env` to `.gitignore`.
 
 As of this writing the secondary database is still empty
 
+**NB** Quick rollback `php artisan migrate:reset` 
+
 ## Local Host
 
 Local docker will run on `localhost:8001` so you can keep Laravel Valet run sites running on .test.
