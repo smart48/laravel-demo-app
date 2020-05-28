@@ -12,6 +12,15 @@ npm-debug.log
 yarn-error.log
 _ide_helper.php
 .env
+
+### Terraform
+
+infrastructure/.terraform/*
+infrastructure/terraform.tfvars
+infrastructure/terraform/terraform.tfvars
+
+### Docker
+
 .docker/.env
 .docker/mysql/vol/
 .docker/mysql2/vol
