@@ -1,9 +1,10 @@
 # L8 Introduction
 
+To get started with this demo application L8 you can clone the application using:
 
-
+```
 git clone `https://github.com/smart48/l8.git`
-
+```
 ## Generate Auth Key and .env
 
 ```
@@ -93,3 +94,17 @@ a78b3cdf6ce1        l8_app              "docker-entrypoint.s…"   3 seconds ago
 ba590f13c57d        mariadb:latest      "docker-entrypoint.s…"   4 seconds ago       Up 3 seconds        3306/tcp               mysql
 ```
 
+
+## Infrastructure
+
+To set up Kubernetes with nodes and managed databases we use Terraform and Kubernetes. You can find all these in the directory `infrastructure`. To start Terraform there use
+
+```
+terraform init
+```
+
+To check if the files will do their job you can run a 
+
+```
+terraform plan
+```
