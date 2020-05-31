@@ -30,6 +30,8 @@ As of this writing the secondary database is still empty
 
 ## Laradock
 
+Laradock based submodule has been added using `git submodule add https://github.com/smart48/smt-docker.git l8-docker  ` and can be used from that folder.
+
 The Laradock `env.l8.demo.example` has been set up to work with:
 
 1. Workspace,
