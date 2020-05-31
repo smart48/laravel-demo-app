@@ -28,59 +28,28 @@ As of this writing the secondary database is still empty
 
 **NB** Quick rollback `php artisan migrate:reset` 
 
-## Local Host
+## Laradock
 
-Local docker will run on `localhost:8001` so you can keep Laravel Valet run sites running on .test.
+Locally we work with `docker-compose.yml` inside the Laradock subdmodule folder. You can run this with `docker-compose up -d` as it is the default. See [Docker docs](https://docs.docker.com/compose/)
 
-indivifual container local ips can be checked using: `docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id`:
+The Laradock `env.l8.example` has been set up to work with PHP FPM, Workspace, two MariaDB containers and one Redis container.
 
-```
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' l8_app_1
-172.18.0.2
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' l8_web_1
-172.18.0.3
-```
 
-## Local Docker Compose
-
-Locally we work with `docker-compose.yml` You can run this with `docker-compose up -d` as it is the default. See [Docker docs](https://docs.docker.com/compose/)
-
-You can add all environmental variables to `.docker/.env`, but they won't load unless you run `eval $(egrep -v '^#' .docker/.env | xargs) docker-compose config` because somehow we have to have .env in same directory and there we already have the one for Laravel!
-
-NB Do make sure you ran `valet stop` if it interferes with you using `*.test` locally.
+**NB** Do make sure you ran `valet stop` if it interferes with you using `*.test` locally.
+**NBB** .docker is still there as directory until we have finished the deploy directory loading from the proper DockerFile.
 
 ```
 docker-compose up -d
-Creating network "l8_app-network" with driver "bridge"
-Building app
-Step 1/24 : FROM php:7.4-fpm-buster
-7.4-fpm-buster: Pulling from library/php
-afb6ec6fdc1c: Pull complete
-3d895574014b: Pull complete
+...
 ...
 ```
 
-If all installed you will see
-`
-```
-docker-compose up -d
-Starting l8_app_1 ... done
-Starting l8_web_1 ... done
-..
-```
 
 And to shut them down
 
 ```
 docker-compose down 
-Sdocker-compose down 
-Stopping l8_web_1 ... done
-Stopping l8_app_1 ... done
-Stopping mysql    ... done
-Removing l8_web_1 ... done
-Removing l8_app_1 ... done
-Removing mysql    ... done
-Removing network l8_app-network
+...
 ```
 
 
@@ -88,16 +57,13 @@ Removing network l8_app-network
 
 ```
 docker container ls 
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
-e4f55fa17a3b        nginx:latest        "nginx -g 'daemon of…"   3 seconds ago       Up 2 seconds        0.0.0.0:8001->80/tcp   l8_web_1
-a78b3cdf6ce1        l8_app              "docker-entrypoint.s…"   3 seconds ago       Up 3 seconds        9000/tcp               l8_app_1
-ba590f13c57d        mariadb:latest      "docker-entrypoint.s…"   4 seconds ago       Up 3 seconds        3306/tcp               mysql
+...
 ```
 
 
 ## Infrastructure
 
-To set up Kubernetes with nodes and managed databases we use Terraform and Kubernetes. You can find all these in the directory `infrastructure`. To start Terraform there use
+To set up Kubernetes with nodes and managed databases at Digital Ocean we use Terraform and Kubernetes. You can find all these in the directory `infrastructure`. To start Terraform there use
 
 ```
 terraform init

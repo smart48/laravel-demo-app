@@ -56,3 +56,11 @@ composer require --dev barryvdh/laravel-ide-helper
 ```
 php artisan ide-helper:generate
 ```
+
+## Laradock
+
+First we need to adjust the .env file based on the exaxmple env file
+
+```
+cp env-example .env
+```
