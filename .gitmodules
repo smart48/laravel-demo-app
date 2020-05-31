@@ -1,0 +1,3 @@
+[submodule "l8-docker"]
+	path = l8-docker
+	url = https://github.com/smart48/smt-docker.git
