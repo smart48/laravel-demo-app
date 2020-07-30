@@ -1,11 +1,10 @@
-# L8 Introduction
+# SMT Laravel Demo App 
 
-To get started with this demo application smt you can clone the application using:
+To get started with this Laravel 7 demo application smt you can clone the application using:
 
 ```
 git clone `https://github.com/smart48/smt-demo.git`
 ```
-
 
 ## Installation 
 
@@ -34,7 +33,7 @@ As of this writing the secondary database is still empty
 
 Laradock based submodule has been added using `git submodule add https://github.com/smart48/smt-docker.git` and can be used from that folder.
 
-The Laradock `env.l8.demo.example` has been set up to work with:
+The Laradock `env.smt.example` has been set up to work with:
 
 1. Workspace,
 2. PHP FPM, 
@@ -42,10 +41,8 @@ The Laradock `env.l8.demo.example` has been set up to work with:
 4. Nginx,
 5. Laravel Horizon,
 6. Redis,
-7. MariaDB, 
-8. MariaDB v2, 
-9. MailDev, 
-10. BeanstalkD. 
+7. MariaDB x 2,
+8. MailDev, 
 
 Rename it to `.env` to work with it inside your project.
 
