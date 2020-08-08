@@ -73,9 +73,9 @@ class DatabaseSeeder extends Seeder
         );
 
         // Uncheck new for these users
-        foreach(User::all() as $user) {
-            $user->ingoing->delete();
-        }
+        // foreach(User::all() as $user) {
+        //     $user->ingoing->delete();
+        // }
 
         $nbrUsers = 5;
 
@@ -104,7 +104,7 @@ class DatabaseSeeder extends Seeder
                 'remember_token' => str_random(10),
             ]
         );
-        $user->ingoing->delete();
+        // $user->ingoing->delete();
 
         // Categories
         DB::table('categories')->insert([

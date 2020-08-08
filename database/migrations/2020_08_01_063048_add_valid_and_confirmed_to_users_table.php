@@ -14,8 +14,8 @@ class AddValidAndConfirmedToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('valid')->after('role');
-            $table->string('confirmed')->after('valid');
+            $table->string('valid')->nullable()->after('role');
+            $table->string('confirmed')->nullable()->after('valid');
         });
     }
 
