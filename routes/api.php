@@ -1,7 +1,13 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+
+/*
+ * Force ssl https://laracasts.com/discuss/channels/laravel/mixed-content-issue-content-must-be-served-as-https?page=2
+ */
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +20,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
