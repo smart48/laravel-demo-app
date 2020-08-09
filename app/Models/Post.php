@@ -10,6 +10,17 @@ use App\Events\ {
 
 class Post extends Model
 {
+    use IngoingTrait;
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ModelCreated::class,
+        'updated' => PostUpdated::class,
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -48,6 +59,28 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * One to Many relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function validComments()
+    {
+        return $this->comments()->whereHas('user', function ($query) {
+            $query->whereValid(true);
+        });
+    }
+
+    /**
+     * One to Many relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function parentComments()
+    {
+        return $this->validComments()->whereParentId(null);
     }
 
     /**
