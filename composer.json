@@ -16,6 +16,7 @@
         "laravel/helpers": "^1.2",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
+        "creativeorange/gravatar": "^1.0",
         "baum/baum": "v2.x-dev#a5944ebfd605688213954fd19e1aff0e8fafb132"
     },
     "require-dev": {
