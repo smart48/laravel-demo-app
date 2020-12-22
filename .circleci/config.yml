@@ -1,0 +1,58 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2.1
+jobs:
+  deploy-prod-job:
+    docker:
+      - image: circleci/php:7.2-browsers
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - $FINGERPRINT
+      - run:
+          name: Start ssh-keyscan
+          command: |
+            ssh-keyscan -p $HOST_PORT $HOST_NAME >> ~/.ssh/known_hosts
+      - run:
+          name: Start master deploy
+          command: |
+            curl -LO https://deployer.org/deployer.phar
+            sudo mv deployer.phar /usr/local/bin/dep
+            chmod +x /usr/local/bin/dep
+            /usr/local/bin/dep deploy production
+  deploy-stg-job:
+    docker:
+      - image: circleci/php:7.2-browsers
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - $FINGERPRINT
+      - run:
+          name: Start ssh-keyscan
+          command: |
+            ssh-keyscan -p $HOST_PORT $HOST_NAME >> ~/.ssh/known_hosts
+      - run:
+          name: Start master deploy
+          command: |
+            curl -LO https://deployer.org/deployer.phar
+            sudo mv deployer.phar /usr/local/bin/dep
+            chmod +x /usr/local/bin/dep
+            /usr/local/bin/dep staging
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - deploy-prod-job:
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-stg-job:
+          filters:
+            branches:
+              only:
+                - develop
