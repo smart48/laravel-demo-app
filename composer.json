@@ -13,6 +13,7 @@
         "baum/baum": "v2.x-dev#a5944ebfd605688213954fd19e1aff0e8fafb132",
         "creativeorange/gravatar": "^1.0",
         "deployer/deployer": "^6.8",
+        "deployer/recipes": "^6.2",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
