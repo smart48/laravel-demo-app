@@ -24,7 +24,6 @@ set('shared_dirs', [
 ]);
 set('shared_files', [
   '.env',
-  '.transip_private_key',
 ]);
 set('writable_dirs', [
   'public/uploads',
