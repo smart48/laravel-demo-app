@@ -60,13 +60,13 @@ task('reload:php-fpm', function () {
 // dep deploy staging
 
 
-host('192.168.64.23')
+host('192.168.64.24')
   ->user('docker')
   ->identityFile('~/.minikube/machines/minikube/id_rsa')
-  ->set('deploy_path', '/tmp/hostpath-provisioner/smt-local/code-pv-claim')
-  // docker exec -it $(docker ps | grep smart48/smt-workspace | awk '{print $1}') /bin/bash
-  ->set('bin/php', "docker exec -t $(docker ps | grep smart48/smt-workspace | awk '{print $1}')  bash -c 'cd release && php'")
-  ->set('bin/composer', "docker exec -t $(docker ps | grep smart48/smt-workspace | awk '{print $1}') bash -c 'cd release && composer'");
+  ->set('deploy_path', '/tmp/hostpath-provisioner/smt-local/code')
+  // docker exec -it $(docker ps | grep smt-workspace | awk '{print $1}') /bin/bash
+  ->set('bin/php', "docker exec -t $(docker ps | grep smt-workspace | awk '{print $1}')  bash -c 'cd release | php'")
+  ->set('bin/composer', "docker exec -t $(docker ps | grep smt-workspace | awk '{print $1}') bash -c 'cd release && composer install'");
 
 host('staging')
   ->hostname('staging.domain.com')
