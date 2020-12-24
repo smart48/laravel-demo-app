@@ -11,7 +11,7 @@ set('default_stage', 'production');
 set('git_tty', true); // [Optional] Allocate tty for git on first deployment
 set('ssh_type', 'native');
 set('cachetool', '/var/run/php/php7.4-fpm.sock');
-set('php_fpm_command', "kill -USR2 "$(ps -ef | grep '[p]hp-fpm: master' | awk '{print $2}')""); // for docker based setups with laradock or similar
+// set('php_fpm_command', "kill -USR2 "$(ps -ef | grep '[p]hp-fpm: master' | awk '{print $2}')""); // for docker based setups with laradock or similar
 set('keep_releases', 10);
 
 // Make sure uploads & published , tls, logs aren't overwritten by deploying
@@ -48,24 +48,26 @@ task('queue:restart', function () {
 });
 
 task('reload:php-fpm', function () {
-  // run('sudo /etc/init.d/php7.4-fpm restart'); // Using SysV Init scripts
-  run('{{php_fpm_command}}');
+  run('sudo /etc/init.d/php7.4-fpm restart'); // Using SysV Init scripts
+  // run('{{php_fpm_command}}');
 });
 
 
 // Hosts
 // local minikube host
-// dep deploy 192.168.64.21
+// dep deploy 192.168.64.23
 // `minikube ip` to get ip
 // dep deploy production
 // dep deploy staging
 
 
-host('192.168.64.21')
-  ->set('deploy_path', '/path/to/deployer')
-  // kubectl exec -it workspace-566b747498-c6xs5 -- php 
-  ->set('bin/php', 'cd /path/to/laradock/ && kubectl exec -t workspace -- php')
-  ->set('bin/composer', 'cd /path/to/laradock/ && kubectl exec -t workspace -- composer -d={{release_path}}');
+host('192.168.64.23')
+  ->user('docker')
+  ->identityFile('~/.minikube/machines/minikube/id_rsa')
+  ->set('deploy_path', '/tmp/hostpath-provisioner/smt-local/code-pv-claim')
+  // docker exec -it $(docker ps | grep smart48/smt-workspace | awk '{print $1}') /bin/bash
+  ->set('bin/php', "docker exec -t $(docker ps | grep smart48/smt-workspace | awk '{print $1}')  bash -c 'cd release && php'")
+  ->set('bin/composer', "docker exec -t $(docker ps | grep smart48/smt-workspace | awk '{print $1}') bash -c 'cd release && composer'");
 
 host('staging')
   ->hostname('staging.domain.com')
