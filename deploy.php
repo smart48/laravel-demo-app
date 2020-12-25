@@ -3,14 +3,14 @@
 namespace Deployer;
 
 require 'recipe/laravel.php';
-require 'vendor/deployer/recipes/recipe/cachetool.php';
+// require 'vendor/deployer/recipes/recipe/cachetool.php';
 
 // Configuration
 set('repository', 'git@github.com:smart48/smt-demo.git');
 set('default_stage', 'production');
 set('git_tty', true); // [Optional] Allocate tty for git on first deployment
 set('ssh_type', 'native');
-set('cachetool', '/var/run/php/php7.4-fpm.sock');
+// set('cachetool', '/var/run/php/php7.4-fpm.sock');
 // set('php_fpm_command', "kill -USR2 "$(ps -ef | grep '[p]hp-fpm: master' | awk '{print $2}')""); // for docker based setups with laradock or similar
 set('keep_releases', 10);
 
@@ -35,32 +35,35 @@ set('writable_dirs', [
 ]);
 
 // SMART CUSTOM DEPLOY COMMANDS
+// new `run('{{bin/php}} {{release_path}}/artisan migrate --force');`
+// old `run('cd {{release_path}} && php artisan migrate');`
 task('db:migrate', function () {
-  run('cd {{release_path}} && php artisan migrate');
+  run('{{bin/php}} {{release_path}}/artisan migrate --force');
 });
 task('horizon:terminate', function () {
-  run('cd {{release_path}} && php artisan horizon:terminate');
+  run('{{bin/php}} {{release_path}}/artisan horizon:terminate');
 });
 
 task('queue:restart', function () {
-  run('cd {{release_path}} && php artisan queue:restart');
+  run('{{bin/php}} {{release_path}}/artisan queue:restart');
 });
 
-task('reload:php-fpm', function () {
-  run('sudo /etc/init.d/php7.4-fpm restart'); // Using SysV Init scripts
-  // run('{{php_fpm_command}}');
-});
+// not on workspace yet
+// task('reload:php-fpm', function () {
+//   run('sudo /etc/init.d/php7.4-fpm restart'); // Using SysV Init scripts
+//   // run('{{php_fpm_command}}');
+// });
 
 
 // Hosts
 // local minikube host
-// dep deploy 192.168.64.23
+// dep deploy $(minikube ip)
 // `minikube ip` to get ip
 // dep deploy production
 // dep deploy staging
 
 
-host('192.168.64.24')
+host('192.168.64.25')
   ->user('docker')
   ->identityFile('~/.minikube/machines/minikube/id_rsa')
   ->set('deploy_path', '/tmp/hostpath-provisioner/smt-local/code')
@@ -89,9 +92,11 @@ after('deploy:symlink', 'db:migrate');
 // Restart job
 after('db:migrate', 'queue:restart');
 
+// New version is needed
 // Clear OPCache
-after('queue:restart', 'cachetool:clear:opcache');
-after('cachetool:clear:opcache', 'horizon:terminate');
+// after('queue:restart', 'cachetool:clear:opcache');
+// after('cachetool:clear:opcache', 'horizon:terminate');
 
-after('deploy', 'reload:php-fpm');
-after('rollback', 'reload:php-fpm');
+// not on Minikube as of yet
+// after('deploy', 'reload:php-fpm');
+// after('rollback', 'reload:php-fpm');
