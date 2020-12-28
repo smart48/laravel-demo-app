@@ -1,0 +1,6 @@
+[submodule "k8"]
+	path = k8
+	url = git@github.com:smart48/lk8.git
+[submodule "kube"]
+	path = kube
+	url = git@github.com:smart48/larakube.git
