@@ -1,6 +1,0 @@
-[submodule "smt-docker"]
-	path = smt-docker
-	url = https://github.com/smart48/smt-docker.git
-[submodule "smt-provision"]
-	path = smt-provision
-	url = https://github.com/smart48/smt-provision.git
