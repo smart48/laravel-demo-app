@@ -64,7 +64,7 @@
                                         <label for="locale">@lang('Default language')</label>
                                         <select id="locale" name="locale" class="form-control">
                                             @foreach($locales as $id => $locale)
-                                                <option value="{{ $id }}" {{ old('locale') ? ($id === old('locale') ? 'selected' : '') : $locale === $actualLocale ? 'selected' : '' }}>{{ $locale }}</option>
+                                                <option value="{{ $id }}" {{ old('locale') ? ($id === old('locale') ? 'selected' : '') : $locale === ($actualLocale ? 'selected' : '' )}}>{{ $locale }}</option>
                                             @endforeach
                                         </select>
                                     </div>
