@@ -67,9 +67,11 @@
 				<li class="has-children">
 					<a href="#">@lang('Categories')</a>
 					<ul class="sub-menu">
-						@foreach ($post->categories as $category)
-							<li><a href="{{ route('category', [$category->slug ]) }}">{{ $category->title }}</a></li>
-						@endforeach
+						@if ($post ?? '')
+							@foreach ($post->categories as $category)
+								<li><a href="{{ route('category', [$category->slug ]) }}">{{ $category->title }}</a></li>
+							@endforeach
+						@endif
 					</ul>
 				</li>
 				@guest
