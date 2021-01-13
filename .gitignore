@@ -1,17 +1,27 @@
+## Public 
+
 /node_modules
 /public/hot
 /public/storage
 /storage/*.key
 /vendor
+public/files/.tmb
+
+## Envs
 .env
 .env.backup
+
+## PHP Unit Cache
 .phpunit.result.cache
+
+## Homestead
 Homestead.json
 Homestead.yaml
+
+## Logs
 npm-debug.log
 yarn-error.log
-_ide_helper.php
-.env
 
-### Docker
+## IDE Helper
+_ide_helper.php
 
